@@ -1,0 +1,91 @@
+#############################################################################################################################
+# DO Community Playbooks
+# Playbook: LEMP (Nginx + PHP + MySQL) on Ubuntu 18.04
+# Manual Steps: https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
+#############################################################################################################################
+- hosts: all
+  remote_user: sammy
+  become: true
+  vars:
+    sys_packages: [ 'nginx', 'mysql-server', 'python-mysqldb', 'php-fpm', 'php-mysql']
+    mysql_root_password: MYSQL_ROOT_PASSWORD
+    http_port: 80
+    http_host: "{{ ansible_facts.eth0.ipv4.address }}" 
+    http_conf: example.com
+  tasks:
+    - name: Update apt
+      apt: update_cache=yes
+
+    - name: Install Required System Packages
+      apt: name={{ sys_packages }} state=latest
+    
+# Nginx Configuration
+    
+    - name: Sets Nginx conf file
+      template:
+        src: ubuntu1804.j2
+        dest: "/etc/nginx/sites-available/{{ http_conf }}"
+
+    - name: Enables new site
+      file:
+        src: "/etc/nginx/sites-available/{{ http_conf }}"
+        dest: "/etc/nginx/sites-enabled/{{ http_conf }}"
+        state: link
+      notify: Reload Nginx
+    
+    - name: Removes "default" site
+      file:
+        path: "/etc/nginx/sites-enabled/default"
+        state: absent
+      notify: Reload Nginx
+
+# MySQL Configuration
+
+    - name: Sets the root password 
+      mysql_user: 
+        name: root 
+        password: "{{ mysql_root_password }}"
+        host_all: yes
+
+    - name: Removes all anonymous user accounts
+      mysql_user:
+        name: ''
+        host_all: yes
+        state: absent
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
+    - name: Removes the MySQL test database
+      mysql_db: 
+        name: test 
+        state: absent
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
+# UFW Configuration
+
+    - name: "UFW - Allow HTTP on port {{ http_port }}"
+      ufw:
+        rule: allow
+        port: "{{ http_port }}"
+        proto: tcp
+
+# Sets Up PHP Info Page
+
+    - name: Sets Up PHP Info Page
+      template:
+        src: info.php.j2
+        dest: "/var/www/html/info.php"
+
+# Handlers
+
+  handlers:
+    - name: Reload Nginx
+      service:
+        name: nginx
+        state: reloaded
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
