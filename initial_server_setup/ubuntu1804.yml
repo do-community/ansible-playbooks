@@ -10,6 +10,7 @@
   gather_facts: false
   vars:
     create_user: sammy
+    copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
   pre_tasks:
     - name: Install Python for Ansible
       raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
@@ -35,11 +36,11 @@
         groups: wheel
         shell: /bin/bash
 
-    - name: Set authorized key for remote user copying it from current local user
+    - name: Set authorized key for remote user
       authorized_key:
         user: "{{ create_user }}"
         state: present
-        key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+        key: "{{ copy_local_key }}"
 
     - name: Disables Password Authentication for Root
       lineinfile:
