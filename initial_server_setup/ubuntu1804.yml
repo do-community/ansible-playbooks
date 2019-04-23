@@ -11,11 +11,7 @@
   vars:
     create_user: sammy
     copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-  pre_tasks:
-    - name: Install Python for Ansible
-      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
-      register: output
-      changed_when: output.stdout != ""
+  
   tasks:
     - name: Make sure we have a 'wheel' group
       group:
