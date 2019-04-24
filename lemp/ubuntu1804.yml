@@ -3,15 +3,24 @@
 # Playbook: LEMP (Nginx + PHP + MySQL) on Ubuntu 18.04
 # Manual Steps: https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
 #############################################################################################################################
+
 - hosts: all
   remote_user: sammy
   become: true
+
+###################################################  
+# VARS section - update these variables accordingly
+###################################################
   vars:
     sys_packages: [ 'nginx', 'mysql-server', 'python-mysqldb', 'php-fpm', 'php-mysql']
     mysql_root_password: MYSQL_ROOT_PASSWORD
     http_port: 80
     http_host: "{{ ansible_facts.eth0.ipv4.address }}" 
     http_conf: example.com
+
+########
+# Tasks
+########
   tasks:
     - name: Update apt
       apt: update_cache=yes

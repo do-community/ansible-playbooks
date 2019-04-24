@@ -1,7 +1,7 @@
 ###########################################################################################################
 # DO Community Playbooks
 # Playbook: Initial Server Setup
-# More Info: https://www.digitalocean.com/community/tutorials/automating-initial-server-setup-with-ansible
+# Guide: https://www.digitalocean.com/community/tutorials/automating-initial-server-setup-with-ansible
 ###########################################################################################################
 
 ---
@@ -11,7 +11,8 @@
   vars:
     create_user: sammy
     copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-  
+    sys_packages: [ 'curl', 'vim', 'git', 'ufw'] 
+
   tasks:
     - name: Make sure we have a 'wheel' group
       group:
@@ -26,7 +27,7 @@
         line: '%wheel ALL=(ALL) NOPASSWD: ALL'
         validate: '/usr/sbin/visudo -cf %s'
 
-    - name: Creates a new regular user with sudo privileges
+    - name: Create a new regular user with sudo privileges
       user:
         name: "{{ create_user }}"
         groups: wheel
@@ -38,23 +39,17 @@
         state: present
         key: "{{ copy_local_key }}"
 
-    - name: Disables Password Authentication for Root
+    - name: Disable password authentication for root
       lineinfile:
         path: /etc/ssh/sshd_config
         state: present
         regexp: '^PermitRootLogin'
         line: 'PermitRootLogin prohibit-password'
 
-- hosts: all
-  remote_user: sammy
-  become: true
-  vars:
-    sys_packages: [ 'curl', 'vim', 'git', 'ufw']
-  tasks:
     - name: Update apt
       apt: update_cache=yes
 
-    - name: Install Required System Packages
+    - name: Install required system packages
       apt: name={{ sys_packages }} state=latest
 
     - name: UFW - Allow SSH connections
