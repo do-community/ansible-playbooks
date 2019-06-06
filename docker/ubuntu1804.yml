@@ -12,15 +12,13 @@
     install_packages: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
     default_image: ubuntu
     default_command: sleep 1d
-    create_containers: [ 'container01', 'container02' ]
+    default_name: docker
+    create_containers: 4
 
   tasks:
 
-    - name: Update apt
-      apt: update_cache=yes
-
     - name: Install required system packages
-      apt: name={{ install_packages }} state=latest
+      apt: name={{ install_packages }} state=latest update_cache=yes
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -45,11 +43,11 @@
         name: "{{ default_image }}"
         source: pull
 
-    # Creates the containers defined by the variable create_containers
+    # Creates the number of containers defined by the variable create_containers, using default values
     - name: Create default containers
       docker_container:
-        name: "{{ item }}"
+        name: "{{default_name}}{{ item }}"
         image: "{{ default_image }}"
         command: "{{ default_command }}"
         state: present
-      loop: "{{ create_containers }}"
+      with_sequence: count={{ create_containers }}
