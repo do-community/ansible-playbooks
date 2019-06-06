@@ -1,0 +1,55 @@
+###########################################################################################################
+# DO Community Playbooks
+# Playbook: Installing Docker and Creating Containers on Ubuntu 18.04
+# Based on: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+###########################################################################################################
+
+---
+- hosts: all
+  remote_user: sammy
+  become: true
+  vars:
+    install_packages: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+    default_image: ubuntu
+    default_command: sleep 1d
+    create_containers: [ 'container01', 'container02' ]
+
+  tasks:
+
+    - name: Update apt
+      apt: update_cache=yes
+
+    - name: Install required system packages
+      apt: name={{ install_packages }} state=latest
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    # Pull image specified by variable default_image from the Docker Hub
+    - name: Pull default Docker image
+      docker_image:
+        name: "{{ default_image }}"
+        source: pull
+
+    # Creates the containers defined by the variable create_containers
+    - name: Create default containers
+      docker_container:
+        name: "{{ item }}"
+        image: "{{ default_image }}"
+        command: "{{ default_command }}"
+        state: present
+      loop: "{{ create_containers }}"

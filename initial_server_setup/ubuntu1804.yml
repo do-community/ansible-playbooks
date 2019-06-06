@@ -1,8 +1,9 @@
 ###########################################################################################################
 # DO Community Playbooks
 # Playbook: Initial Server Setup
-# Guide: https://www.digitalocean.com/community/tutorials/automating-initial-server-setup-with-ansible
-###########################################################################################################
+# Based on: https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+# Dedicated Guide: https://www.digitalocean.com/community/tutorials/automating-initial-server-setup-with-ansible
+###################################################################################################################
 
 ---
 - hosts: all

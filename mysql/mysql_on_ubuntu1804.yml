@@ -12,7 +12,7 @@
 # VARS section - update these variables accordingly
 ###################################################
   vars:
-    sys_packages: [ 'mysql-server', 'python3-pymysql' ]
+    install_packages: [ 'mysql-server', 'python3-pymysql' ]
     mysql_root_password: MYSQL_ROOT_PASSWORD
  
 ########
@@ -23,7 +23,7 @@
       apt: update_cache=yes
 
     - name: Install MySQL
-      apt: name={{ sys_packages }} state=latest
+      apt: name={{ install_packages }} state=latest
 
 # MySQL Configuration
 
