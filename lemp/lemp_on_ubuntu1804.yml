@@ -12,7 +12,6 @@
 # VARS section - update these variables accordingly
 ###################################################
   vars:
-    install_packages: [ 'nginx', 'mysql-server', 'python-mysqldb', 'php-fpm', 'php-mysql']
     mysql_root_password: MYSQL_ROOT_PASSWORD
     http_port: 80
     http_host: "{{ ansible_facts.eth0.ipv4.address }}" 
@@ -21,12 +20,15 @@
 ########
 # Tasks
 ########
-  tasks:
-    - name: Update apt
-      apt: update_cache=yes
 
-    - name: Install Required System Packages
-      apt: name={{ install_packages }} state=latest
+  tasks:
+    - name: Install Prerequisites
+      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+      loop: [ 'aptitude']
+
+    - name: Install LEMP Packages
+      apt: name={{ item }} update_cache=yes state=latest
+      loop: [ 'nginx', 'mysql-server', 'python3-pymysql', 'php-fpm', 'php-mysql']
     
 # Nginx Configuration
     
@@ -54,7 +56,7 @@
       mysql_user: 
         name: root 
         password: "{{ mysql_root_password }}"
-        host_all: yes
+        login_unix_socket: /var/run/mysqld/mysqld.sock
 
     - name: Removes all anonymous user accounts
       mysql_user:
