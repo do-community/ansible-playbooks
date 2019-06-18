@@ -32,6 +32,7 @@
       user:
         name: "{{ create_user }}"
         groups: wheel
+        append: true
         shell: /bin/bash
 
     - name: Set authorized key for remote user
