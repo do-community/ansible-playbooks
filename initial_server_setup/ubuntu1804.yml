@@ -47,7 +47,7 @@
       lineinfile:
         path: /etc/ssh/sshd_config
         state: present
-        regexp: '^PermitRootLogin'
+        regexp: '^#?PermitRootLogin'
         line: 'PermitRootLogin prohibit-password'
 
     - name: Update apt
