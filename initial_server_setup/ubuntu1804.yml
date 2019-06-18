@@ -31,6 +31,7 @@
     - name: Create a new regular user with sudo privileges
       user:
         name: "{{ create_user }}"
+        state: present
         groups: wheel
         append: true
         shell: /bin/bash
