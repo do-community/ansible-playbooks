@@ -34,6 +34,7 @@
         state: present
         groups: wheel
         append: true
+        create_home: true
         shell: /bin/bash
 
     - name: Set authorized key for remote user
