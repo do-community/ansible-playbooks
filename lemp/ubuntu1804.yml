@@ -5,17 +5,15 @@
 #############################################################################################################################
 
 - hosts: all
-  remote_user: sammy
-  become: true
 
 ###################################################  
 # VARS section - update these variables accordingly
 ###################################################
   vars:
-    mysql_root_password: MYSQL_ROOT_PASSWORD
-    http_port: 80
+    mysql_root_password: "MYSQL_ROOT_PASSWORD"
+    http_port: "80"
     http_host: "{{ ansible_facts.eth0.ipv4.address }}" 
-    http_conf: example.com
+    http_conf: "example.com"
 
 ########
 # Tasks
@@ -34,7 +32,7 @@
     
     - name: Sets Nginx conf file
       template:
-        src: ubuntu1804.j2
+        src: "files/nginx_ubuntu1804.j2"
         dest: "/etc/nginx/sites-available/{{ http_conf }}"
 
     - name: Enables new site
@@ -85,7 +83,7 @@
 
     - name: Sets Up PHP Info Page
       template:
-        src: info.php.j2
+        src: "files/info.php.j2"
         dest: "/var/www/html/info.php"
 
 # Handlers
