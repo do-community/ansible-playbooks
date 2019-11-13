@@ -1,32 +1,19 @@
-#############################################################################################################################
-# DO Community Playbooks
-# Playbook: LEMP (Nginx + PHP + MySQL) on Ubuntu 18.04
-# Based on: https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04
-#############################################################################################################################
-
+##################################################
+# DO Community Playbooks: LEMP on Ubuntu 18.04
+##################################################
+---
 - hosts: all
-
-###################################################  
-# VARS section - update these variables accordingly
-###################################################
-  vars:
-    mysql_root_password: "MYSQL_ROOT_PASSWORD"
-    http_port: "80"
-    http_host: "{{ ansible_facts.eth0.ipv4.address }}" 
-    http_conf: "example.com"
-
-########
-# Tasks
-########
+  vars_files:
+    - vars/default.yml
 
   tasks:
     - name: Install Prerequisites
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
-      loop: [ 'aptitude']
+      loop: [ 'aptitude' ]
 
     - name: Install LEMP Packages
       apt: name={{ item }} update_cache=yes state=latest
-      loop: [ 'nginx', 'mysql-server', 'python3-pymysql', 'php-fpm', 'php-mysql']
+      loop: [ 'nginx', 'mysql-server', 'python3-pymysql', 'php-fpm', 'php-mysql' ]
     
 # Nginx Configuration
     
