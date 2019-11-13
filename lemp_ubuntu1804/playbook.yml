@@ -19,7 +19,7 @@
     
     - name: Sets Nginx conf file
       template:
-        src: "files/nginx_ubuntu1804.j2"
+        src: "files/nginx.conf.j2"
         dest: "/etc/nginx/sites-available/{{ http_conf }}"
 
     - name: Enables new site
