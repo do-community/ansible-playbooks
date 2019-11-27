@@ -1,5 +1,5 @@
 ---
-mysql_root_password: "MYSQL_ROOT_PASSWORD"
-http_host: "{{ ansible_facts.eth0.ipv4.address }}"
-http_conf: "example.com"
+mysql_root_password: "mysql_root_password"
+http_host: "your_domain"
+http_conf: "your_domain.conf"
 http_port: "80"

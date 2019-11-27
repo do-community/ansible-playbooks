@@ -16,7 +16,6 @@
       loop: [ 'nginx', 'mysql-server', 'python3-pymysql', 'php-fpm', 'php-mysql' ]
     
 # Nginx Configuration
-    
     - name: Sets Nginx conf file
       template:
         src: "files/nginx.conf.j2"
@@ -36,7 +35,6 @@
       notify: Reload Nginx
 
 # MySQL Configuration
-
     - name: Sets the root password 
       mysql_user: 
         name: root 
@@ -59,7 +57,6 @@
         login_password: "{{ mysql_root_password }}"
 
 # UFW Configuration
-
     - name: "UFW - Allow HTTP on port {{ http_port }}"
       ufw:
         rule: allow
@@ -67,13 +64,10 @@
         proto: tcp
 
 # Sets Up PHP Info Page
-
     - name: Sets Up PHP Info Page
       template:
         src: "files/info.php.j2"
         dest: "/var/www/html/info.php"
-
-# Handlers
 
   handlers:
     - name: Reload Nginx
