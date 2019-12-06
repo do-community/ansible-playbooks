@@ -1,18 +1,15 @@
 # Apache on Ubuntu 18.04
 
-This playbook will install the Apache 2 web server on an Ubuntu 18.04 machine. A virtualhost will be created with the options specified in the `vars/default.yml` variable file.
+This playbook will install the Apache 2 web server on an Ubuntu 18.04 machine, as explained in the guide on [How to Use Ansible to Install and Configure Apache on Ubuntu 18.04". A virtualhost will be created with the options specified in the `vars/default.yml` variable file.
 
 ## Settings
 
-```yml
-#vars/default.yml
----
-app_user: "sammy"
-http_host: "your_domain"
-http_conf: "your_domain.conf"
-http_port: "80"
-disable_default: true
-```
+- `app_user`: a remote non-root user on the Ansible host that will own the application files.
+- `http_host`: your domain name.
+- `http_conf`: the name of the configuration file that will be created within Apache.
+- `http_port`: HTTP port, default is 80.
+- `disable_default`: whether or not to disable the default Apache website. When set to true, your new virtualhost should be used as default website. Default is true.
+
 
 ## Running this Playbook
 
