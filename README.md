@@ -7,7 +7,7 @@ A collection of minimalist Ansible playbooks for automating server setups, based
 - [LEMP on Ubuntu 18.04](https://github.com/do-community/ansible-playbooks/tree/master/lemp_ubuntu1804)
 - [Docker on Ubuntu 18.04](https://github.com/do-community/ansible-playbooks/tree/master/docker_ubuntu1804)
 
-_\*the Initial Server Setup should be your starting point for fresh servers.*_
+_\*the Initial Server Setup should be your starting point for fresh servers._
 
 ## Playbook Structure
 
@@ -34,18 +34,34 @@ lemp_ubuntu1804
 - `playbook.yml`: the playbook file.
 - `readme.md`: instructions and links related to this playbook.
 
-## Essential Reading
+## Getting Started
 
-To get up and running fast, you can go straight to our guide on [How to Install and Configure Ansible on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-18-04).
+To set up your Ansible environment, please follow our guide on [How to Install and Configure Ansible on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-18-04).
 
-After making sure you are able to connect to your nodes from an Ansible control machine, you can start with the [Initial Server Setup]() Ansible guide
-for the [setup playbook](https://github.com/do-community/ansible-playbooks/tree/master/setup_ubuntu1804).
+### Connection Test
 
-Once you have run the initial server setup, you can choose from any of the available server setup playbooks:
+From your local machine or Ansible control node, run:
+
+```command
+ansible all -m ping -u remote_user
+```
+
+If you're able to get a "pong" reply back from your node(s), you are good to proceed.
+
+## Guides
+
+The following guides cover how to use the playbooks you'll find in this repository.
+
+### Initial Server Setup
+
+- [Initial Server Setup for Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-18-04)
+
+Once you have executed the initial server setup, you can choose from any of the available server setup playbooks:
 
 ### Web Servers
-- [Apache on Ubuntu 18.04]()*soon*
-- [LEMP on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-lemp-on-ubuntu-18-04)
+- [Apache on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-apache-on-ubuntu-18-04)
+- [LEMP (Linux, Nginx, MySQL, PHP) on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-lemp-on-ubuntu-18-04)
+- [LAMP (Linux, Apache, MySQL, PHP) on Ubuntu 18.04](#) *soon*
 
 ### Containers & K8s
 - [Docker on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-18-04)
