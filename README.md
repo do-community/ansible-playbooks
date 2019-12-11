@@ -5,6 +5,7 @@ A collection of minimalist Ansible playbooks for automating server setups, based
 - [Initial Server Setup for Ubuntu 18.04](https://github.com/do-community/ansible-playbooks/tree/master/setup_ubuntu1804) *
 - [Apache on Ubuntu 18.04](https://github.com/do-community/ansible-playbooks/tree/master/apache_ubuntu1804)
 - [LEMP on Ubuntu 18.04](https://github.com/do-community/ansible-playbooks/tree/master/lemp_ubuntu1804)
+- [LAMP on Ubuntu 18.04](https://github.com/do-community/ansible-playbooks/tree/master/lamp_ubuntu1804)
 - [Docker on Ubuntu 18.04](https://github.com/do-community/ansible-playbooks/tree/master/docker_ubuntu1804)
 
 _\*the Initial Server Setup should be your starting point for fresh servers._
@@ -61,7 +62,7 @@ Once you have executed the initial server setup, you can choose from any of the 
 ### Web Servers
 - [Apache on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-apache-on-ubuntu-18-04)
 - [LEMP (Linux, Nginx, MySQL, PHP) on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-lemp-on-ubuntu-18-04)
-- [LAMP (Linux, Apache, MySQL, PHP) on Ubuntu 18.04](#) *soon*
+- [LAMP (Linux, Apache, MySQL, PHP) on Ubuntu 18.04](#) *guide coming soon*
 
 ### Containers & K8s
 - [Docker on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-18-04)
