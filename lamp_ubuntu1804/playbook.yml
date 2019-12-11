@@ -30,12 +30,6 @@
         dest: "/etc/apache2/sites-available/{{ http_conf }}"
       notify: Reload Apache
 
-    - name: Set up Apache dir.conf
-      template:
-        src: "files/dir.conf.j2"
-        dest: "/etc/apache2/mods-enabled/dir.conf"
-      notify: Restart Apache
-
     - name: Enable new site
       shell: /usr/sbin/a2ensite {{ http_conf }}
       notify: Reload Apache

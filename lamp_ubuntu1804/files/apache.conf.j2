@@ -9,4 +9,9 @@
     <Directory /var/www/{{ http_host }}>
           Options -Indexes
     </Directory>
+
+    <IfModule mod_dir.c>
+        DirectoryIndex index.php index.html index.cgi index.pl  index.xhtml index.htm
+    </IfModule>
+
 </VirtualHost>
