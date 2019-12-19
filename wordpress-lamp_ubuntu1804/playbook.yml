@@ -51,7 +51,7 @@
 
     - name: Disable default Apache site
       shell: /usr/sbin/a2dissite 000-default.conf
-      notify: Reload Apache
+      notify: Restart Apache
       tags: [ apache ]
 
   # MySQL Configuration
@@ -111,7 +111,7 @@
         src: https://wordpress.org/latest.tar.gz
         dest: "/var/www/{{ http_host }}"
         remote_src: yes
-        creates: "/var/www/{{ http_host }}"
+        creates: "/var/www/{{ http_host }}/wordpress"
       tags: [ wordpress ]
 
     - name: Set ownership
