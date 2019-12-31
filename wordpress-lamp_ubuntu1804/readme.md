@@ -4,13 +4,14 @@ This playbook will install a WordPress website on top of a LAMP environment (**L
 
 ## Settings
 
-- `mysql_root_password`: the password for the MySQL root account.
-- `app_user`: a remote non-root user on the Ansible host that will own the application files.
-- `http_host`: your domain name.
-- `http_conf`: the name of the configuration file that will be created within Apache.
-- `http_port`: HTTP port, default is 80.
-- `disable_default`: whether or not to disable the default Apache website. When set to true, your new virtualhost should be used as default website. Default is true.
-
+- `php_modules`:  An array containing PHP extensions that should be installed to support your WordPress setup. You don't need to change this variable, but you might want to include new extensions to the list if your specific setup requires it.
+- `mysql_root_password`: The desired password for the **root** MySQL account.
+- `mysql_db`: The name of the MySQL database that should be created for WordPress.
+- `mysql_user`: The name of the MySQL user that should be created for WordPress.
+- `mysql_password`: The password for the new MySQL user.
+- `http_host`: Your domain name.
+- `http_conf`: The name of the configuration file that will be created within Apache.
+- `http_port`: HTTP port for this virtual host, where `80` is the default. 
 
 ## Running this Playbook
 
@@ -19,7 +20,7 @@ Quickstart guide for those already familiar with Ansible:
 ### 1. Obtain the playbook
 ```shell
 git clone https://github.com/do-community/ansible-playbooks.git
-cd ansible-playbooks/wordpress_lamp_ubuntu1804
+cd ansible-playbooks/wordpress-lamp_ubuntu1804
 ```
 
 ### 2. Customize Options
@@ -30,11 +31,19 @@ nano vars/default.yml
 
 ```yml
 ---
-app_user: "sammy"
+#System Settings
+php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
+
+#MySQL Settings
+mysql_root_password: "mysql_root_password"
+mysql_db: "wordpress"
+mysql_user: "sammy"
+mysql_password: "password"
+
+#HTTP Settings
 http_host: "your_domain"
 http_conf: "your_domain.conf"
 http_port: "80"
-disable_default: true
 ```
 
 ### 3. Run the Playbook
@@ -43,4 +52,4 @@ disable_default: true
 ansible-playbook -l [target] -i [inventory file] -u [remote user] playbook.yml
 ```
 
-For more information on how to run this Ansible setup, please check this guide: [soon]().
+For more information on how to run this Ansible setup, please check this guide: [How to Use Ansible to Install and Set Up WordPress with LAMP on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-wordpress-with-lamp-on-ubuntu-18-04).
