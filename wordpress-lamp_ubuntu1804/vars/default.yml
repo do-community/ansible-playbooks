@@ -8,8 +8,7 @@ mysql_db: "wordpress"
 mysql_user: "sammy"
 mysql_password: "password"
 
-#WordPress Settings
-wp_user: "sammy"
+#HTTP Settings
 http_host: "your_domain"
 http_conf: "your_domain.conf"
 http_port: "80"
