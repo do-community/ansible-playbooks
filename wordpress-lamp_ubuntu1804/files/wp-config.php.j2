@@ -49,14 +49,14 @@ define('FS_METHOD', 'direct');
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '{{ ansible_date_time.iso8601_micro | hash('sha256') }}' );
-define( 'SECURE_AUTH_KEY',  '{{ ansible_date_time.iso8601_micro | hash('sha256') }}' );
-define( 'LOGGED_IN_KEY',    '{{ ansible_date_time.iso8601_micro | hash('sha256') }}' );
-define( 'NONCE_KEY',        '{{ ansible_date_time.iso8601_micro | hash('sha256') }}' );
-define( 'AUTH_SALT',        '{{ ansible_date_time.iso8601_micro | hash('sha256') }}' );
-define( 'SECURE_AUTH_SALT', '{{ ansible_date_time.iso8601_micro | hash('sha256') }}' );
-define( 'LOGGED_IN_SALT',   '{{ ansible_date_time.iso8601_micro | hash('sha256') }}' );
-define( 'NONCE_SALT',       '{{ ansible_date_time.iso8601_micro | hash('sha256') }}' );
+define( 'AUTH_KEY',         '{{ lookup('password', '/dev/null chars=ascii_letters length=64') }}' );
+define( 'SECURE_AUTH_KEY',  '{{ lookup('password', '/dev/null chars=ascii_letters length=64') }}' );
+define( 'LOGGED_IN_KEY',    '{{ lookup('password', '/dev/null chars=ascii_letters length=64') }}' );
+define( 'NONCE_KEY',        '{{ lookup('password', '/dev/null chars=ascii_letters length=64') }}' );
+define( 'AUTH_SALT',        '{{ lookup('password', '/dev/null chars=ascii_letters length=64') }}' );
+define( 'SECURE_AUTH_SALT', '{{ lookup('password', '/dev/null chars=ascii_letters length=64') }}' );
+define( 'LOGGED_IN_SALT',   '{{ lookup('password', '/dev/null chars=ascii_letters length=64') }}' );
+define( 'NONCE_SALT',       '{{ lookup('password', '/dev/null chars=ascii_letters length=64') }}' );
 
 /**#@-*/
 
