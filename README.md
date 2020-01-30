@@ -48,7 +48,7 @@ From your local machine or Ansible control node, run:
 ansible all -m ping -u remote_user
 ```
 
-If you're able to get a "pong" reply back from your node(s), you are good to proceed.
+If you're able to get a "pong" reply back from your node(s), your setup works as expected and you'll be able to run both ad-hoc commands and playbooks on your nodes, using Ansible.
 
 ## Guides
 
