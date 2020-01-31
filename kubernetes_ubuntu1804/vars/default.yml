@@ -1,0 +1,3 @@
+--
+pod_network_cidr: 10.244.0.0/25
+create_user: sammy

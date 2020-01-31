@@ -1,0 +1,19 @@
+- hosts: all
+  become: yes
+  vars_files:
+    - vars/default.yml
+  
+  tasks:
+    - name: create the 'ubuntu' user
+      user: name={{ create_user }} append=yes state=present createhome=yes shell=/bin/bash
+
+    - name: allow 'ubuntu' to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        line: '{{ create_user }} ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+
+    - name: set up authorized keys for the ubuntu user
+      authorized_key: user={{ create_user }} key="{{item}}"
+      with_file:
+        - ~/.ssh/id_rsa_{{ inventory_hostname }}
