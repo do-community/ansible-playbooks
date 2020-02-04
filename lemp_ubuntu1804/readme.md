@@ -8,7 +8,7 @@ A virtualhost will be created with the options specified in the `vars/default.ym
 
 - `mysql_root_password`: the password for the MySQL root account.
 - `http_host`: your domain name.
-- `http_conf`: the name of the configuration file that will be created within Apache.
+- `http_conf`: the name of the configuration file that will be created within nginx.
 - `http_port`: HTTP port, default is 80.
 
 
