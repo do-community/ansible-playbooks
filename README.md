@@ -15,7 +15,7 @@ _\*the Initial Server Setup should be your starting point for fresh servers._
 
 The playbooks contained in this repository were created for educational purposes, and should serve as a base for you to create your own playbooks and roles.
 
-Although we opt to not use roles, our playbooks follow a distinctive structure to facilitate reuse while keeping them mostly self-contained and straightforward.
+Although we opt to not use the roles, our playbooks follow a distinctive structure to facilitate the reuse while keeping them mostly self-contained and straightforward.
 
 For instance, this is how the `lemp` playbook is structured:
 
