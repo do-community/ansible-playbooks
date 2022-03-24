@@ -48,6 +48,11 @@
         regexp: '^#?PermitRootLogin'
         line: 'PermitRootLogin prohibit-password'
 
+    - name: Restart ssh service
+      service:
+        name: ssh
+        state: restarted
+
 # Install Packages
     - name: Update apt
       apt: update_cache=yes
