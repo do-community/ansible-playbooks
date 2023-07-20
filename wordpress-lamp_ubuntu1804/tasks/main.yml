@@ -127,13 +127,3 @@
     dest: "/var/www/{{ http_host }}/wordpress/wp-config.php"
   tags: [ wordpress ]
 
-handlers:
-- name: Reload Apache
-  service:
-    name: apache2
-    state: reloaded
-
-- name: Restart Apache
-  service:
-    name: apache2
-    state: restarted
